@@ -186,9 +186,9 @@ public class Runigram {
 	 */
 	public static Color blend(Color c1, Color c2, double alpha) {
 		
-		int newR = (int) ((c1.getRed()) * alpha) + (int) ((c2.getRed()) * (1 - alpha));
-		int newG = (int) ((c1.getGreen()) * alpha) + (int) ((c2.getGreen()) * (1 - alpha));
-		int newB = (int) ((c1.getBlue()) * alpha) + (int) ((c2.getBlue()) * (1 - alpha));
+		int newR = (int) ((c1.getRed() * alpha) + (c2.getRed() * (1 - alpha)));
+		int newG = (int) ((c1.getGreen() * alpha) + (c2.getGreen() * (1 - alpha)));
+		int newB = (int) ((c1.getBlue() * alpha) + (c2.getBlue() * (1 - alpha)));
 
 
 		Color newColor = new Color(newR, newG, newB);
@@ -211,6 +211,7 @@ public class Runigram {
 			for (int j = 0; j < width; j++)
 			{
 				blended [i][j] = blend(image1[i][j], image2[i][j], alpha);
+				// insert each blended pixel to it's location in the blended image
 			}
 		}
 		return blended;
@@ -229,7 +230,11 @@ public class Runigram {
 			double alpha = (double) i / n ; 
 			Color[][] morph = blend(source, scaledTarget, alpha);
 			Runigram.display(morph);
-			StdDraw.pause(1000/24); 
+			StdDraw.pause(1000/60); 
+			/**
+			 *  Movies and video games often use a frame rate of 60 frames per second 
+			 * 	because this is sufficient to create the illusion of smooth motion.
+			 */
 		}		
 	}
 	
